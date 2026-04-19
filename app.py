@@ -4,6 +4,7 @@ import mysql.connector
 app = Flask(__name__)
 
 # 🔌 DATABASE CONNECTION
+
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
@@ -94,6 +95,6 @@ def result():
     return render_template("result.html", student=student)
 
 
-# ▶️ RUN APP
 if __name__ == "__main__":
     app.run(debug=True)
+    
