@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #602668, #5c372d);
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 25px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 32px;
+}
+
+/* CONTAINER */
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    color: white;
+}
+
+/* FORM */
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 150px;
+}
+
+/* BUTTON */
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #140620;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00b894;
+    transform: scale(1.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: rgba(81, 9, 9, 0.2);
+}
+
+tr:nth-child(even) {
+    background: rgba(255,255,255,0.1);
+}
+
+/* BACK BUTTON */
+.back {
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>⚙️ Admin Dashboard</h1>
+    <p>Manage Students & Results</p>
+</div>
+
+<div class="container">
+
+    <!-- ADD RESULT -->
+    <div class="card">
+        <h2>➕ Add / Update Result</h2>
+
+        <form action="/add_score" method="POST">
+            <div class="form-row">
+                <input type="text" name="reg_no" placeholder="Register No" required>
+
+                <select name="exam" required>
+                    <option value="">Select Subject</option>
+                    <option>DBMS</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                    <option>Data Structures</option>
+                </select>
+
+                <input type="number" name="score" placeholder="Score" required>
+
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- STUDENT TABLE -->
+    <div class="card">
+        <h2>📋 Registered Students</h2>
+
+        {% if data %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Reg No</th>
+                <th>Exam</th>
+                <th>Score</th>
+            </tr>
+
+            {% for row in data %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.email }}</td>
+                <td>{{ row.reg_no }}</td>
+                <td>{{ row.exam }}</td>
+                <td>{{ row.score if row.score else '-' }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% else %}
+            <p class="empty">No students found</p>
+        {% endif %}
+    </div>
+
+    <a href="/" class="back">⬅ Back to Home</a>
+
+</div>
+
+</body>
+</html>
