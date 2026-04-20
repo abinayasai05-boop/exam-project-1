@@ -1,11 +1,19 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
+import os
 
 app = Flask(__name__)
 
+# ✅ Database path - works on both local and Render
+# Render uses /tmp/ for writable storage
+if os.environ.get('RENDER'):
+    DATABASE_PATH = '/tmp/database.db'
+else:
+    DATABASE_PATH = 'database.db'
+
 # ✅ DB connection
 def get_db_connection():
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -112,4 +120,4 @@ def result():
 
 # ▶️ RUN APP
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000, debug=True)
