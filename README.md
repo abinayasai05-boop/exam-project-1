@@ -105,6 +105,7 @@ For Admin:
 
 Registration Page Admin Dashboard Result Page
 <img width="952" height="470" alt="image" src="https://github.com/user-attachments/assets/55930bba-df53-49e5-b758-fb3398566476" />
+<img width="950" height="471" alt="image" src="https://github.com/user-attachments/assets/8ef8fd76-b666-4293-99cd-a50c10af0642" />
 
 
 ---
